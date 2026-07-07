@@ -70,7 +70,7 @@ Sample values for the review: `Juan Pérez` / `59171234567` / `Av. América #123
 
 ## Webhook setup
 
-1. Deploy (any always-on Node host with a persistent disk for `DB_PATH`) or tunnel locally:
+1. Deploy (see [DEPLOY.md](DEPLOY.md) for the VPS + Caddy setup) or tunnel locally:
    `cloudflared tunnel --url http://localhost:3000` (or `ngrok http 3000`).
 2. In the Meta App dashboard → WhatsApp → Configuration, set the callback URL to `https://<host>/webhook` and the verify token to `WHATSAPP_VERIFY_TOKEN`, then subscribe to the `messages` webhook field.
 3. Meta requires a valid TLS certificate (platform/tunnel TLS is fine; self-signed is not).

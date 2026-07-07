@@ -1,0 +1,29 @@
+# systemd unit for cj-web-service.
+# Install: sudo cp deploy/cj-web-service.service /etc/systemd/system/
+#          sudo systemctl daemon-reload && sudo systemctl enable --now cj-web-service
+# Logs:    journalctl -u cj-web-service -f
+
+[Unit]
+Description=WhatsApp taxi chatbot (Radio Taxi Ciudad Jardin)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cjbot
+Group=cjbot
+WorkingDirectory=/opt/cj-web-service
+EnvironmentFile=/opt/cj-web-service/.env
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=5
+
+# Hardening: read-only filesystem except the SQLite data directory
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/cj-web-service/data
+
+[Install]
+WantedBy=multi-user.target

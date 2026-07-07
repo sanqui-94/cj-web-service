@@ -1,0 +1,11 @@
+# Caddy reverse proxy for cj-web-service.
+# Install: sudo cp deploy/Caddyfile /etc/caddy/Caddyfile && sudo systemctl reload caddy
+#
+# Replace the hostname with yours:
+#   - sslip.io (no signup):  <VPS-IP-with-dashes>.sslip.io, e.g. 203-0-113-45.sslip.io
+#   - DuckDNS (free signup): <name>.duckdns.org pointed at the VPS IP
+# Caddy obtains and renews the Let's Encrypt certificate automatically.
+
+cjtaxi.example.com {
+	reverse_proxy localhost:3000
+}
